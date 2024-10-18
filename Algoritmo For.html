@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Personas</title>
+    <script>
+        function calcular() {
+            // Obtener los datos de las personas
+            const ages = [22, 35];
+            const maritalStatuses = [2, 1]; // 1: Soltero, 2: Casado
+            const heights = [180, 165];
+            const genders = [1, 2]; // 1: Hombre, 2: Mujer
+
+            let validPersonCount = 0;
+            let totalAge = 0;
+            let totalHeight = 0;
+            const TOTAL_PERSONS = ages.length;
+
+            // Iterar sobre las personas
+            for (let personIndex = 0; personIndex < TOTAL_PERSONS; personIndex++) {
+                const age = ages[personIndex];
+                const maritalStatus = maritalStatuses[personIndex];
+                const height = heights[personIndex];
+                const gender = genders[personIndex];
+
+                // Comprobar condiciones
+                if (age > 18 && maritalStatus === 1 && height > 170 && gender === 1) {
+                    validPersonCount++;
+                    totalAge += age;
+                    totalHeight += height;
+                }
+            }
+
+            // Calcular promedios y porcentaje
+            let averageAge = 0;
+            let averageHeight = 0;
+            let fulfillmentPercentage = 0;
+
+            if (validPersonCount > 0) {
+                averageAge = totalAge / validPersonCount;
+                averageHeight = totalHeight / validPersonCount;
+                fulfillmentPercentage = (validPersonCount / TOTAL_PERSONS) * 100;
+
+                // Mostrar resultados
+                document.getElementById("result").innerHTML = `
+                    Promedio de edad: ${averageAge.toFixed(2)} años<br>
+                    Promedio de estatura: ${averageHeight.toFixed(2)} centímetros<br>
+                    Porcentaje de personas que cumplen: ${fulfillmentPercentage.toFixed(2)}%
+                `;
+            } else {
+                document.getElementById("result").innerHTML = "No hay personas que cumplan con los requisitos.";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Evaluación de Personas</h1>
+    <button onclick="calcular()">Calcular Resultados</button>
+    <div id="result"></div>
+</body>
+</html>
